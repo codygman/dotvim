@@ -1,0 +1,12 @@
+snippet directive
+	${1:appVariable}.directive('${2:directiveName}', function() {
+		return {
+			restrict: '${3:restrictTo}',
+			template: '${4:templateBody}'
+		}
+	})$5
+
+snippet ctrl
+	${1:appVariable}.controller("${2:myCtrl}", function($scope) {
+		${3:myBody}
+	})$4
