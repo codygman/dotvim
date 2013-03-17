@@ -28,9 +28,11 @@ Bundle 'ervandew/supertab'
 Bundle 'mattn/zencoding-vim'
 "Bundle 'lukaszb/vim-web-indent'
 Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-surround'
-Bundle 'Raimondi/delimitMate'
+"Bundle 'tpope/vim-surround'
+"Bundle 'Raimondi/delimitMate'
 Bundle 'msanders/snipmate.vim'
+Bundle 'vim-scripts/slimv.vim'
+Bundle 'jpalardy/vim-slime'
 
 " The leader character is the proper way to create your own key commands:
 let mapleader = ","
@@ -119,9 +121,25 @@ au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\
 "javascript
 au Filetype javascript setlocal ts=4 sts=4 sw=4
 
+"htmldjango
+au Filetype htmldjango setlocal ts=2 sts=2 sw=2
+au Filetype html setlocal ts=2 sts=2 sw=2
+
 "supertab stuffs
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose=1
 set completeopt=menuone,longest,preview
 
 set pastetoggle=<F2>
+
+" slimv
+let g:lisp_rainbow=1
+
+"vim-slime
+let g:slime_paste_file = "$HOME/.slime_paste"
+
+"buffer resizing shortcuts
+if bufwinnr(1)
+	map + <C-W>+
+	map - <C-W>-
+endif
