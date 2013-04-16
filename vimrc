@@ -12,6 +12,15 @@ set incsearch           " Incremental search
 set autowrite           " Automatically save before commands like :next and :make (but may be bad for editing code in deployed projects)
 set number
 
+" Keyboard shortcuts
+" ========================
+set pastetoggle=<F2>
+"buffer resizing shortcuts
+if bufwinnr(1)
+	map + <C-W>+
+	map - <C-W>-
+endif
+
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -43,7 +52,9 @@ Bundle 'ervandew/supertab'
 "Bundle 'klen/python-mode' 
 "
 
-" The leader character is the proper way to create your own key commands:
+" Vim Internal Settings
+" ===================================
+
 let mapleader = ","
 
 nnoremap <leader><space> :noh<cr>
@@ -93,6 +104,8 @@ colorscheme solarized
 syntax on " by default... could do it instead in filetype areas.
 highlight Comment ctermfg=white  " Blue comments are impossible to read on many terminals
 
+" Language Specific Settings
+" =============================
 "python
 au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
@@ -105,19 +118,16 @@ au Filetype javascript setlocal ts=4 sts=4 sw=4
 au Filetype htmldjango setlocal ts=2 sts=2 sw=2
 au Filetype html setlocal ts=2 sts=2 sw=2
 
-set pastetoggle=<F2>
-"buffer resizing shortcuts
-if bufwinnr(1)
-	map + <C-W>+
-	map - <C-W>-
-endif
+" Plugin specific settings
+" ==================================
+
+"supertab stuffs
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose=1
+set completeopt=menuone,longest,preview
 
 " currently unused stuff
-
-" full support for golang stuff
-" I have a vundle for this now
-"set rtp+=$GOROOT/misc/vim
-
+" =====================================
 
 " Rope AutoComplete
 "let ropevim_vim_completion = 1
@@ -136,12 +146,6 @@ endif
 
 "" jedi stuff
 "let g:jedi#auto_initialization = 1
-
-"supertab stuffs
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabClosePreviewOnPopupClose=1
-set completeopt=menuone,longest,preview
-
 
 " slimv
 " let g:lisp_rainbow=1
