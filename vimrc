@@ -20,19 +20,28 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "My Bundles
-" original repos on github
+
+" Work
 Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'undx/vim-gocode'
 Bundle 'ervandew/supertab'
-Bundle 'mattn/zencoding-vim'
+""" Jedi works with regular library packages (not external yet)
+"Bundle 'davidhalter/jedi-vim'
+"Bundle 'jmcantrell/vim-virtualenv'
+
+" non-work related
+"Bundle 'mattn/zencoding-vim'
 "Bundle 'lukaszb/vim-web-indent'
-Bundle 'pangloss/vim-javascript'
+"Bundle 'pangloss/vim-javascript'
 "Bundle 'tpope/vim-surround'
 "Bundle 'Raimondi/delimitMate'
-Bundle 'msanders/snipmate.vim'
-Bundle 'vim-scripts/slimv.vim'
-Bundle 'jpalardy/vim-slime'
+"Bundle 'msanders/snipmate.vim'
+"Bundle 'vim-scripts/slimv.vim'
+"Bundle 'jpalardy/vim-slime'
+"Bundle 'klen/python-mode' 
+"
 
 " The leader character is the proper way to create your own key commands:
 let mapleader = ","
@@ -69,8 +78,6 @@ if has ("autocmd")
  " to automatically do language-dependent indenting add 'indent' as well.
  filetype plugin on
  filetype indent on
- "autocmd FileType python source ~/.vim/filetype-py.vim
-
 endif " has ("autocmd")
 
 " Some Debian-specific things
@@ -78,33 +85,6 @@ augroup filetype
   au BufRead reportbug.*                set ft=mail
   au BufRead reportbug-*                set ft=mail
 augroup END
-
-augroup encrypted
-    au!
-
-    " First make sure nothing is written to ~/.viminfo while editing
-    " an encrypted file.
-    autocmd BufReadPre,FileReadPre      *.gpg set viminfo=
-    " We don't want a swap file, as it writes unencrypted data to disk
-    autocmd BufReadPre,FileReadPre      *.gpg set noswapfile
-    " Switch to binary mode to read the encrypted file
-    autocmd BufReadPre,FileReadPre      *.gpg set bin
-    autocmd BufReadPre,FileReadPre      *.gpg let ch_save = &ch|set ch=2
-    autocmd BufReadPost,FileReadPost    *.gpg '[,']!gpg --decrypt 2> /dev/null
-    " Switch to normal mode for editing
-    autocmd BufReadPost,FileReadPost    *.gpg set nobin
-    autocmd BufReadPost,FileReadPost    *.gpg let &ch = ch_save|unlet ch_save
-    autocmd BufReadPost,FileReadPost    *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
-
-    " Convert all text to encrypted-to-self text before writing
-    autocmd BufWritePre,FileWritePre    *.gpg   '[,']!gpg --default-recipient-self -ae 2>/dev/null
-    " Undo the encryption so we are back in the normal text, directly
-    " after the file has been written.
-    autocmd BufWritePost,FileWritePost    *.gpg   u
-augroup END
-
-" full support for golang stuff
-set rtp+=$GOROOT/misc/vim
 
 "display stuff
 set background=dark  " hint that the terminal is dark-background
@@ -125,21 +105,48 @@ au Filetype javascript setlocal ts=4 sts=4 sw=4
 au Filetype htmldjango setlocal ts=2 sts=2 sw=2
 au Filetype html setlocal ts=2 sts=2 sw=2
 
-"supertab stuffs
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabClosePreviewOnPopupClose=1
-set completeopt=menuone,longest,preview
-
 set pastetoggle=<F2>
-
-" slimv
-let g:lisp_rainbow=1
-
-"vim-slime
-let g:slime_paste_file = "$HOME/.slime_paste"
-
 "buffer resizing shortcuts
 if bufwinnr(1)
 	map + <C-W>+
 	map - <C-W>-
 endif
+
+" currently unused stuff
+
+" full support for golang stuff
+" I have a vundle for this now
+"set rtp+=$GOROOT/misc/vim
+
+
+" Rope AutoComplete
+"let ropevim_vim_completion = 1
+"let ropevim_extended_complete = 1
+"let g:ropevim_autoimport_modules = ["os.*","traceback","django"]
+"imap <c-space> <C-R>=RopeCodeAssistInsertMode()<CR>
+
+"PyMode
+"let g:pymode_doc=1
+"let g:pymode_lint=0
+" Enable autoimport
+"let g:pymode_rope_enable_autoimport = 1
+
+" vim-virtualenv
+"let g:virtualenv_auto_activate = 1
+
+"" jedi stuff
+"let g:jedi#auto_initialization = 1
+
+"supertab stuffs
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose=1
+set completeopt=menuone,longest,preview
+
+
+" slimv
+" let g:lisp_rainbow=1
+
+"vim-slime
+" let g:slime_paste_file = "$HOME/.slime_paste"
+
+
