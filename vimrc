@@ -37,7 +37,7 @@ Bundle 'jnwhiteh/vim-golang'
 Bundle 'undx/vim-gocode'
 Bundle 'ervandew/supertab'
 """ Jedi works with regular library packages (not external yet)
-"Bundle 'davidhalter/jedi-vim'
+Bundle 'davidhalter/jedi-vim'
 "Bundle 'jmcantrell/vim-virtualenv'
 
 " non-work related
@@ -46,8 +46,13 @@ Bundle 'ervandew/supertab'
 "Bundle 'pangloss/vim-javascript'
 "Bundle 'tpope/vim-surround'
 "Bundle 'Raimondi/delimitMate'
-"Bundle 'msanders/snipmate.vim'
-"Bundle 'vim-scripts/slimv.vim'
+"" Snipmate and dependencies
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/vim-snippets"
+Bundle 'garbas/vim-snipmate'
+
+Bundle 'vim-scripts/slimv.vim'
 "Bundle 'jpalardy/vim-slime'
 "Bundle 'klen/python-mode' 
 "
@@ -57,8 +62,13 @@ Bundle 'ervandew/supertab'
 
 let mapleader = ","
 
-nnoremap <leader><space> :noh<cr>
-nnoremap <leader>v V` ] " ,v re-visual-selects just-pasted text
+inoremap <leader><space> :noh<cr>
+inoremap <leader>v V` ] " ,v re-visual-selects just-pasted text
+
+"" Ctrl+kjhl Navigation
+" TODO: This clashes if you try to move up or down too soon after
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
 
 " Commenting blocks of code.
 autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
@@ -118,6 +128,11 @@ au Filetype javascript setlocal ts=4 sts=4 sw=4
 au Filetype htmldjango setlocal ts=2 sts=2 sw=2
 au Filetype html setlocal ts=2 sts=2 sw=2
 
+"xml
+
+" REQUIRES: libxml2-utils
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
 " Plugin specific settings
 " ==================================
 
@@ -145,12 +160,12 @@ set completeopt=menuone,longest,preview
 "let g:virtualenv_auto_activate = 1
 
 "" jedi stuff
-"let g:jedi#auto_initialization = 1
+let g:jedi#auto_initialization = 1
+"let g:jedi#popup_on_dot = 0
 
 " slimv
-" let g:lisp_rainbow=1
+let g:slimv_lisp='!racket'
+let g:lisp_rainbow=1
 
 "vim-slime
 " let g:slime_paste_file = "$HOME/.slime_paste"
-
-
