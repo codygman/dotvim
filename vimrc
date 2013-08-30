@@ -36,6 +36,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-fugitive'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'roman/golden-ratio'
 
 " Vim Internal Settings
 " ===================================
