@@ -39,6 +39,11 @@ Bundle 'jnwhiteh/vim-golang'
 Bundle 'roman/golden-ratio'
 Bundle 'kien/ctrlp.vim'
 
+"snipmate and dependencies
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+
 " Vim Internal Settings
 " ===================================
 let mapleader = ","
@@ -108,6 +113,9 @@ au Filetype html setlocal ts=2 sts=2 sw=2
 "xml
 """ REQUIRES: libxml2-utils
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
+"md
+au BufNewFile,BufRead *.md setlocal ft=md
 
 " Plugin specific settings
 " ==================================
