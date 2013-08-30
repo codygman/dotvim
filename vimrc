@@ -37,6 +37,7 @@ Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-fugitive'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'roman/golden-ratio'
+Bundle 'kien/ctrlp.vim'
 
 " Vim Internal Settings
 " ===================================
