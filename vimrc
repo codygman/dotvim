@@ -21,6 +21,10 @@ if bufwinnr(1)
 	map - <C-W>-
 endif
 
+map <F5> :%s/<\([^>]\)*>/\r&\r/g<enter>:g/^$/d<enter>vat=
+map <F6> vatJxvito<right><left>x
+map <F7> /\v^\s*([a-zA-Z\-0-9\$])<enter>qm<F6>nq@q1000@@:1<enter>
+
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -28,42 +32,14 @@ call vundle#rc()
 " let Vundle manage Vundle (required)
 Bundle 'gmarik/vundle'
 
-"My Bundles
-
-" Work
-Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'undx/vim-gocode'
 Bundle 'ervandew/supertab'
-""" Jedi works with regular library packages (not external yet)
-Bundle 'davidhalter/jedi-vim'
-"Bundle 'jmcantrell/vim-virtualenv'
-
-" non-work related
-"Bundle 'mattn/zencoding-vim'
-"Bundle 'lukaszb/vim-web-indent'
-"Bundle 'pangloss/vim-javascript'
-"Bundle 'tpope/vim-surround'
-"Bundle 'Raimondi/delimitMate'
-"" Snipmate and dependencies
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/vim-snippets"
-Bundle 'garbas/vim-snipmate'
-
-Bundle 'vim-scripts/slimv.vim'
-"Bundle 'jpalardy/vim-slime'
-"Bundle 'klen/python-mode' 
-"
+Bundle 'tpope/vim-fugitive'
+Bundle 'jnwhiteh/vim-golang'
 
 " Vim Internal Settings
 " ===================================
-
 let mapleader = ","
-
-inoremap <leader><space> :noh<cr>
-inoremap <leader>v V` ] " ,v re-visual-selects just-pasted text
 
 "" Ctrl+kjhl Navigation
 " TODO: This clashes if you try to move up or down too soon after
@@ -112,12 +88,11 @@ set background=dark  " hint that the terminal is dark-background
 set t_Co=256
 colorscheme solarized
 syntax on " by default... could do it instead in filetype areas.
-highlight Comment ctermfg=white  " Blue comments are impossible to read on many terminals
 
 " Language Specific Settings
 " =============================
 "python
-au FileType python set omnifunc=pythoncomplete#Complete
+"au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
@@ -129,8 +104,7 @@ au Filetype htmldjango setlocal ts=2 sts=2 sw=2
 au Filetype html setlocal ts=2 sts=2 sw=2
 
 "xml
-
-" REQUIRES: libxml2-utils
+""" REQUIRES: libxml2-utils
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " Plugin specific settings
@@ -140,32 +114,3 @@ au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose=1
 set completeopt=menuone,longest,preview
-
-" currently unused stuff
-" =====================================
-
-" Rope AutoComplete
-"let ropevim_vim_completion = 1
-"let ropevim_extended_complete = 1
-"let g:ropevim_autoimport_modules = ["os.*","traceback","django"]
-"imap <c-space> <C-R>=RopeCodeAssistInsertMode()<CR>
-
-"PyMode
-"let g:pymode_doc=1
-"let g:pymode_lint=0
-" Enable autoimport
-"let g:pymode_rope_enable_autoimport = 1
-
-" vim-virtualenv
-"let g:virtualenv_auto_activate = 1
-
-"" jedi stuff
-let g:jedi#auto_initialization = 1
-"let g:jedi#popup_on_dot = 0
-
-" slimv
-let g:slimv_lisp='!racket'
-let g:lisp_rainbow=1
-
-"vim-slime
-" let g:slime_paste_file = "$HOME/.slime_paste"
